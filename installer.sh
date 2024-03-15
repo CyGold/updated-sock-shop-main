@@ -7,7 +7,7 @@ sudo apt-get upgrade -y
 
 sudo apt-get install unzip
 
-# install terraform
+# install and update terraform
 
 sudo apt-get update && sudo apt-get install -y gnupg software-properties-common
 
