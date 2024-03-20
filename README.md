@@ -11,11 +11,11 @@ the automated deployment the sock-shop microservice
 connect to the ec2 instance and run the commands
 #git clone *https://github.com/CyGold/updated-sock-shop-main.git em*
 this clones the got repository to the instance
-`cd em` 
+``` cd em ``` 
 changes directory to em
 `chmod +x *installer.sh* `
 gives permission to the script
-*./installer.sh*
+` ./installer.sh `
 
 runs the script which is responsible for the installation of jenkins, terraform, AWS CLI and 
 #aws configure
