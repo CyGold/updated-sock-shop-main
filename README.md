@@ -1,7 +1,8 @@
 # Project Overview:
 The Socks Shop application is a popular microservices-based e-commerce platform that is used as a reference application for demonstrating modern cloud-native technologies. The application is composed of multiple microservices, each of which is responsible for a specific function, such as product catalog, shopping cart, and user authentication. The application is designed to be highly scalable, resilient, and fault-tolerant, making it an ideal candidate for deployment on Kubernetes.
 The project will involve deploying the Socks Shop application on a Kubernetes cluster using an Infrastructure as Code (IaC) approach. This will include provisioning the necessary infrastructure resources on AWS, setting up a deployment pipeline, monitoring the performance and health of the application, and securing the infrastructure.
-The project will be implemented using Terraform for infrastructure provisioning, GitHub Actions for the deployment pipeline, Kubernetes for container orchestration, Helm for package management, Prometheus for monitoring, ELK Stack for logging, and Ansible for security.
+![alt text](<images/architecture diagram.jpeg>)
+
 
 # PRE-REQUISITE
 -AWS account
@@ -38,14 +39,28 @@ sign into jenkins using the ip address on port 8080 and input the password seen 
 
 In jenkins dashboard, click on*manage %* and go to *security* and click the check box under *CSF*, back to the *manage %* menu and go to *credentials*, then *global* and *add credentials*
 the first credential's file format id *username and password* which will include your github username and password, the next two are *AWS ACCESS KEY* and *AWS SECRET ACCESS KEY* with the file format as *secret text* and details required are from the IAM user created beforehand.
-back to the jenkins dashboard, click on *new item* and give it any name of your choice and click on new pipeline, change the name of branch to main and the filename to cluster-jenkins, select the pipeline SCM as git and the previously created credential, click on ok and on the dashboard *build now*. this facilitates the creation of eks cluster
-repeat the above step and the github file will remain as jenkinsfile,this facilitates the creation of prometheus, deploys the sock-shop microservice as well as the ingress rile to eks, as well as create ngnix controller and route 53 and sends an application for ssl certificate as seen in the screenshot below-
+back to the jenkins dashboard, click on *new item* and give it any name of your choice and click on new pipeline, change the name of branch to main and the filename to cluster-jenkins, select the pipeline SCM as git and the previously created credential, click on ok and on the dashboard *build now*. this facilitates the creation of eks cluster.
+after the first pipeline, the eks cluster can be connected to using the command below -
+
+``` aws eks update-kubeconfig --name=hr-dev-eks-demo --region=eu-west-2 ```
+
+repeat the above step and the github file will remain as jenkinsfile,this facilitates the creation of prometheus, deploys the sock-shop microservice as well as the ingress rile to eks, as well as create ngnix controller and route 53 and sends an application.
+
+
+the next step is copy the name servers from route53 on aws to the domain name and save the name servers. this may take a few hours to apply the changes-. 
+![alt text](images/route-53.jpg)
+
+Also, the ssl certificate may remain pending until approved by aws which may take some time-.
 ![alt text](images/ssl-cert.jpg)
 
-
-the next step is copy the name servers from route53 on aws to the domain name and save the name servers. this may take a few hours to apply the changes. also, the ssl certificate may remain pending until approved by aws.
 copy the assigned grafana as well as the sock-shop urls to see the default pages
-sign into grafana with username as admin and the password as prom-operator
+sign into grafana with username as admin and the password as prom-operator-
+![alt text](images/grafana.jpg)
+
+sock-shop application can be seen in the screenshot below-
+![alt text](images/sock-shoP.jpg)
+
+
 once done, you can destroy both builds on jenkins and terminate the instance  
 
  
